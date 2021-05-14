@@ -1,0 +1,51 @@
+package test;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+public class seleniumCodeClass {
+
+	
+	public static void main(String[] args) throws InterruptedException, IOException {
+		
+		String businessPrices=null;
+		String payAsYouGoPrices=null;
+		String premiumPrices=null;
+		String enterprisePrices=null;
+		
+		Properties property=new Properties();  
+	    property.load(new FileInputStream("src/configuration/configuration.properties"));
+	    
+	    
+		System.setProperty("webdriver.chrome.driver", "E:\\workspace\\chromedriver_win32\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://callhub.io/pricing/");
+		Thread.sleep(5000);
+		
+		
+		WebElement monthlyRadioButton=driver.findElement(By.xpath(property.getProperty("monthlyRadioButton")));
+		monthlyRadioButton.click();
+		Thread.sleep(5000);
+		
+		WebElement businessPrice=driver.findElement(By.xpath("//*[text()='199']"));
+		businessPrices=businessPrice.getText();
+		
+		WebElement payAsYouGoPrice=driver.findElement(By.xpath("//*[text()='0']"));
+		payAsYouGoPrices=payAsYouGoPrice.getText();
+		
+		WebElement radio4=driver.findElement(By.xpath("//*[text()='499']"));
+		premiumPrices=radio4.getText();
+		WebElement radio5=driver.findElement(By.xpath("//*[text()='Custom pricing']"));
+		enterprisePrices=radio5.getText();
+		
+		driver.quit();
+		
+		
+	}
+
+}

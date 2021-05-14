@@ -1,0 +1,3 @@
+halfyearlyRadioButton=//ul[@class='plan-pricing-timeline']/li[3]
+quaterlyRadioButton=//ul[@class='plan-pricing-timeline']/li[2]
+yearlyRadioButton=//ul[@class='plan-pricing-timeline']/li[4]

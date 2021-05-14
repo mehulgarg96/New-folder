@@ -1,0 +1,25 @@
+package test;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+public class seleniumCodeClass {
+
+	public static void main(String[] args) throws InterruptedException, IOException {
+		FileReader reader=new FileReader("db.properties");  
+	    Properties p=new Properties();  
+	    p.load(reader);
+	    
+		System.setProperty("webdriver.chrome.driver", "E:\\workspace\\chromedriver_win32\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://callhub.io/pricing/");
+		driver.manage().window().maximize();
+		
+	}
+
+}

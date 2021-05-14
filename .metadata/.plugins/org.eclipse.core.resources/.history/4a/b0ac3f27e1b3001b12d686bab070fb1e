@@ -1,0 +1,14 @@
+package test;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.WebDriver;
+public class seleniumCodeClass {
+
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver", "E:\\workspace\\chromedriver_win32\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://callhub.io/pricing/");
+		Thread.sleep(10000);
+	}
+
+}

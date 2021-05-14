@@ -1,0 +1,11 @@
+# Monthly Pricing Expected Results.
+monthlyBusinessPrice=$199.98/mo
+monthlyPayAsYouGoPrice=$0
+monthlyPremiumPrice=$499.95/mo
+monthlyEnterprisePrice=Custom pricing
+
+# Quaterly Pricing Expected Results.
+quaterlyBusinessPrice=$199.98/mo
+quaterlyPayAsYouGoPrice=$0
+quaterlyPremiumPrice=$499.95/mo
+quaterlyEnterprisePrice=Custom pricing

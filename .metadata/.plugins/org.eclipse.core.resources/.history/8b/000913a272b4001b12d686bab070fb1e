@@ -1,0 +1,54 @@
+package test;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+public class seleniumCodeClass {
+
+	
+	public static void main(String[] args) throws InterruptedException, IOException {
+		
+		String businessPrices=null;
+		String payAsYouGoPrices=null;
+		String premiumPrices=null;
+		String enterprisePrices=null;
+		
+		Properties property=new Properties();  
+	    property.load(new FileInputStream("src/configuration/configuration.properties"));
+	    Properties expectedPrices=new Properties();  
+	    expectedPrices.load(new FileInputStream("src/configuration/expectedPrices.properties"));
+	    
+		System.setProperty("webdriver.chrome.driver", "E:\\workspace\\chromedriver_win32\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://callhub.io/pricing/");
+		Thread.sleep(5000);
+		
+		
+		WebElement monthlyRadioButton=driver.findElement(By.xpath(property.getProperty("monthlyRadioButton")));
+		monthlyRadioButton.click();
+		Thread.sleep(5000);
+		
+		WebElement businessPrice=driver.findElement(By.xpath(property.getProperty("businessPrice")));
+		businessPrices=businessPrice.getText().trim();
+		
+		WebElement payAsYouGoPrice=driver.findElement(By.xpath(property.getProperty("payAsYouGoPrice")));
+		payAsYouGoPrices=payAsYouGoPrice.getText().trim();
+		
+		WebElement premiumPrice=driver.findElement(By.xpath(property.getProperty("premiumPrice")));
+		premiumPrices=premiumPrice.getText().trim();
+		WebElement enterprisePrice=driver.findElement(By.xpath(property.getProperty("enterprisePrice")));
+		enterprisePrices=enterprisePrice.getText().trim();
+		
+		if(businessPrices.equals(expectedPrices.getProperty("monthlyBusinessPrice")) && payAsYouGoPrices.equals(expectedPrices.getProperty("monthlyPayAsYouGoPrice")) && premiumPrices.equals(expectedPrices.getProperty("monthlyPremiumPrice")) && enterprisePrices.equals(expectedPrices.getProperty("monthlyEnterprisePrice")))
+		
+		driver.quit();
+		
+		
+	}
+
+}

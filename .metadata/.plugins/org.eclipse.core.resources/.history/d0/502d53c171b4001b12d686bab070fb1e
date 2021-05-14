@@ -1,0 +1,5 @@
+# Monthly Pricing Expected Results.
+monthlyBusinessPrice=//*[text()='199']
+monthlyPayAsYouGoPrice=//*[text()='0']
+monthlyPremiumPrice=//*[text()='499']
+monthlyEnterprisePrice=//*[text()='Custom pricing']

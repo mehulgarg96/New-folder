@@ -1,0 +1,96 @@
+package test;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+public class seleniumCodeClass {
+
+	
+	public static void main(String[] args) throws InterruptedException, IOException {
+		
+		int passCounter=0;
+		int failCounter=0;
+		WebElement businessPrice=null;
+		WebElement payAsYouGoPrice=null;
+		WebElement premiumPrice=null;
+		WebElement enterprisePrice=null;
+		WebElement activeRadioButton=null;
+		
+		Properties property=new Properties();  
+	    property.load(new FileInputStream("src/configuration/configuration.properties"));
+	    Properties expectedPrices=new Properties();  
+	    expectedPrices.load(new FileInputStream("src/configuration/expectedPrices.properties"));
+	    
+		System.setProperty("webdriver.chrome.driver", "E:\\workspace\\chromedriver_win32\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://callhub.io/pricing/");
+		Thread.sleep(5000);
+		
+		// Test case 1 starts from here.
+		activeRadioButton=driver.findElement(By.xpath(property.getProperty("monthlyRadioButton")));
+		activeRadioButton.click();
+		Thread.sleep(5000);
+		
+		businessPrice=driver.findElement(By.xpath(property.getProperty("monthlyBusinessPrice")));
+		String businessPrices=businessPrice.getText().trim();
+		
+		payAsYouGoPrice=driver.findElement(By.xpath(property.getProperty("payAsYouGoPrice")));
+		String payAsYouGoPrices=payAsYouGoPrice.getText().trim();
+		
+		premiumPrice=driver.findElement(By.xpath(property.getProperty("monthlyPremiumPrice")));
+		String premiumPrices=premiumPrice.getText().trim();
+		enterprisePrice=driver.findElement(By.xpath(property.getProperty("enterprisePrice")));
+		String enterprisePrices=enterprisePrice.getText().trim();
+		
+		if(businessPrices.equals(expectedPrices.getProperty("monthlyBusinessPrice")) && payAsYouGoPrices.equals(expectedPrices.getProperty("monthlyPayAsYouGoPrice")) && premiumPrices.equals(expectedPrices.getProperty("monthlyPremiumPrice")) && enterprisePrices.equals(expectedPrices.getProperty("monthlyEnterprisePrice"))) {
+			System.out.println("Test Case 1 passed successfully.");
+			System.out.println("The Expected and the Actual Prices for the Monthly Scheme of Call Hub matched Successfully.");
+			passCounter++;
+		}else {
+			System.out.println("Test Case 1 failed.");
+			System.out.println("The Expected and the Actual Prices for the Monthly Scheme of Call Hub did not match. Please recheck the pricing chart.");
+			failCounter++;
+		}
+		
+		businessPrices=null;
+		payAsYouGoPrices=null;
+		premiumPrices=null;
+		enterprisePrices=null;
+		
+		// Test case 2 starts from here.
+		activeRadioButton=driver.findElement(By.xpath(property.getProperty("quaterlyRadioButton")));
+		activeRadioButton.click();
+		Thread.sleep(5000);
+		
+		businessPrice=driver.findElement(By.xpath(property.getProperty("quaterlyBusinessPrice")));
+		businessPrices=businessPrice.getText().trim();
+		
+		payAsYouGoPrice=driver.findElement(By.xpath(property.getProperty("payAsYouGoPrice")));
+		payAsYouGoPrices=payAsYouGoPrice.getText().trim();
+		
+		premiumPrice=driver.findElement(By.xpath(property.getProperty("quaterlyPremiumPrice")));
+		premiumPrices=premiumPrice.getText().trim();
+		enterprisePrice=driver.findElement(By.xpath(property.getProperty("enterprisePrice")));
+		enterprisePrices=enterprisePrice.getText().trim();
+		
+		if(businessPrices.equals(expectedPrices.getProperty("quaterlyBusinessPrice")) && payAsYouGoPrices.equals(expectedPrices.getProperty("quaterlyPayAsYouGoPrice")) && premiumPrices.equals(expectedPrices.getProperty("quaterlyPremiumPrice")) && enterprisePrices.equals(expectedPrices.getProperty("quaterlyEnterprisePrice"))) {
+			System.out.println("Test Case 2 passed successfully.");
+			System.out.println("The Expected and the Actual Prices for the Quaterly Scheme of Call Hub matched Successfully.");
+			passCounter++;
+		}else {
+			System.out.println("Test Case 2 failed.");
+			System.out.println("The Expected and the Actual Prices for the Quaterly Scheme of Call Hub did not match. Please recheck the pricing chart.");
+			failCounter++;
+		}
+		
+		driver.quit();
+		
+		
+	}
+
+}

@@ -1,0 +1,30 @@
+package test;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+public class seleniumCodeClass {
+
+	public static void main(String[] args) throws InterruptedException, IOException {
+		/*FileReader reader=new FileReader("configuration.configuration.properties");  
+	    Properties property=new Properties();  
+	    property.load(reader);*/
+	    
+		System.setProperty("webdriver.chrome.driver", "E:\\workspace\\chromedriver_win32\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://callhub.io/pricing/");
+		
+		Thread.sleep(5000);
+		WebElement e1=driver.findElement(By.xpath("//*[@id=\"gatsby-focus-wrapper\"]/main/div[2]/div/ul/li[3]"));
+		e1.click();
+	}
+
+}
